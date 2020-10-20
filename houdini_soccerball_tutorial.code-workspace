@@ -1,6 +1,6 @@
 {
     "settings": {
-        "python.pythonPath": "",
+        "python.pythonPath": "C:/Program Files/Side Effects Software/Houdini 18.0.566/python27/python2.7.exe",
         "python.linting.flake8Enabled": true,
         "python.autoComplete.extraPaths": [
             "C:/Program Files/Side Effects Software/Houdini 18.0.566/houdini/python2.7libs",
