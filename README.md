@@ -2,7 +2,10 @@
 
 ## 概要
 以下のチュートリアルの内容を python の hou モジュールで実装してみる
+https://www.sidefx.com/ja/tutorials/houdini-foundations-soccerball/?collection=74
 https://d2wvmrjymyrujw.cloudfront.net/media/uploads/tutorial/foundations/houdini_foundation_soccerball_01.pdf
+
+プロジェクトのファイルは落としておく
 
 
 ## 実行方法
@@ -13,8 +16,8 @@ import hrpyc
 hrpyc.start_server()
 ```
 
-https://stackoverflow.com/questions/41471578/visual-studio-code-how-to-add-multiple-paths-to-python-path
 https://www.sidefx.com/ja/docs/houdini/hom/rpc.html
+https://www.sidefx.com/ja/docs/houdini/hom/hou/index
 
 ## houのインポート処理
 Visual Studio Code である程度インテリセンスが効く様にしたいかつ問題なくコピペで実行できるようにするために各コードに以下のような感じで hou のインポート処理を書いてます。
