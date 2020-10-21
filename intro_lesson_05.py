@@ -12,7 +12,7 @@ if not 'HFS' in os.environ:
         import hou
         import toolutils
 
-geo = hou.node("/obj/box_object")
+geo = hou.node("/obj/soccerball_geo")
 
 # 01
 pane = hou.ui.curDesktop().paneTabOfType(hou.paneTabType.SceneViewer)

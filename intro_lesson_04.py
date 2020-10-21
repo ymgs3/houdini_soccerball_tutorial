@@ -51,8 +51,11 @@ subdivide.setDisplayFlag(True)
 polyextrude.parm('dist').set(0.1)
 polyextrude.parm('inset').set(-0.02)
 
+geo.setName("soccerball_geo")
+
 ifd = hou.node("/out").createNode('ifd')
 ifd.parm('vm_usemaxthreads').set(2)
+
 
 # TODO Render Region 
 
