@@ -60,8 +60,8 @@ subdivide.setInput(0,bend)
 subdivide.setDisplayFlag(True)
 
 # 04
-sopcreate.setInput(0,sceneimport)
-sopcreate.setDisplayFlag(True)
+sceneimport.setInput(0,sopcreate)
+sceneimport.setDisplayFlag(True)
 
 camera = stage.createNode("camera")
 camera.setParms(
@@ -71,7 +71,7 @@ camera.setParms(
     }
 )
 
-camera.setInput(0,sopcreate)
+camera.setInput(0,sceneimport)
 camera.setDisplayFlag(True)
 
 # 05
@@ -128,6 +128,7 @@ lightmixer.setInput(0,light2)
 #    '[{"controls": ["buttons"], "rgb": [55, 55, 55], "prim_path": "{0}", "path": "{0}", "type": "LightItem", "contents": []}, {"controls": ["buttons"], "rgb": [55, 55, 55], "prim_path": "{1}", "path": "{1}", "type": "LightItem", "contents": []}, {"controls": ["buttons"], "rgb": [55, 55, 55], "prim_path": "{2}", "path": "{2}", "type": "LightItem", "contents": []}]'.format(domelight.parm("primpath").eval(),light.parm("primpath").eval(),light2.parm("primpath").eval())
 #)
 lightmixer.setDisplayFlag(True)
+lightmixer.setCurrent(True)
 
 
 # 全ノードをいい位置に移動
