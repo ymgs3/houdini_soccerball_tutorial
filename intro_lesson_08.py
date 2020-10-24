@@ -106,22 +106,14 @@ bend.setParmExpressions(
 
 # 08
 soccerball_ctrl.parm("tz").lock(True)
-soccerball_ctrl.parm("rx").lock(True)
-soccerball_ctrl.parm("ry").lock(True)
-soccerball_ctrl.parm("rz").lock(True)
-soccerball_ctrl.parm("sx").lock(True)
-soccerball_ctrl.parm("sy").lock(True)
-soccerball_ctrl.parm("sz").lock(True)
+soccerball_ctrl.parmTuple("r").lock(True)
+soccerball_ctrl.parmTuple("s").lock(True)
 
 # 09
 squash_ctrl.parm("tx").lock(True)
 squash_ctrl.parm("tz").lock(True)
-squash_ctrl.parm("rx").lock(True)
-squash_ctrl.parm("ry").lock(True)
-squash_ctrl.parm("rz").lock(True)
-squash_ctrl.parm("sx").lock(True)
-squash_ctrl.parm("sy").lock(True)
-squash_ctrl.parm("sz").lock(True)
+squash_ctrl.parmTuple("r").lock(True)
+squash_ctrl.parmTuple("s").lock(True)
 
 # 全ノードをいい位置に移動
 for node in hou.node("/").allSubChildren():
