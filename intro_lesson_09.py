@@ -13,6 +13,7 @@ if not 'HFS' in os.environ:
 
 soccerball_ctrl = hou.node("/obj/soccerball_ctrl")
 squash_ctrl = hou.node("/obj/squash_ctrl")
+soccerball_anim = hou.node("/obj/soccerball_anim")
 
 # 01
 hou.playbar.setFrameRange(1,120)
@@ -63,3 +64,42 @@ for frame in frame_list:
     key.setAccel(0.2)
     soccerball_ctrl_ty.setKeyframe(key)
     height /= 2.0
+
+# 04
+soccerball_anim.parm("vport_onionskin").set(2)
+settings = toolutils.sceneViewer().curViewport().settings()
+settings.setOnionSkinning(True)
+blue = hou.Color((0, 0, 1.0))
+settings.setOnionSkinFramesBeforeCount(3)
+settings.setOnionSkinFramesBeforeTint(blue)
+red = hou.Color((1.0, 0, 0))
+settings.setOnionSkinFramesAfterCount(3)
+settings.setOnionSkinFramesAfterTint(red)
+print(settings.onionSkinFramesAfterTint())
+
+
+# 08
+key.setInSlope(0)
+key.setInAccel(0.2)
+key.setSlope(0)
+key.setAccel(0.2)
+squash_ctrl_ty = squash_ctrl.parm("ty")
+frame_list = [1, 24, 48]
+value = 0.5
+for frame in frame_list:
+    key.setFrame(frame)
+    key.setValue(value)
+    value /= 2.0
+    squash_ctrl_ty.setKeyframe(key)
+
+
+frame_list = [12, 36, 60]
+value = -0.5
+for frame in frame_list:
+    key.setFrame(frame-1)
+    key.setValue(0)
+    squash_ctrl_ty.setKeyframe(key)
+    key.setFrame(frame)
+    key.setValue(value)
+    value /= 2.0
+    squash_ctrl_ty.setKeyframe(key)
