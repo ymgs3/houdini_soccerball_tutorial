@@ -103,3 +103,7 @@ for frame in frame_list:
     key.setValue(value)
     value /= 2.0
     squash_ctrl_ty.setKeyframe(key)
+
+key.setFrame(65)
+key.setValue(0)
+squash_ctrl_ty.setKeyframe(key)
