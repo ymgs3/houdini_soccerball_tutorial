@@ -107,3 +107,10 @@ for frame in frame_list:
 key.setFrame(65)
 key.setValue(0)
 squash_ctrl_ty.setKeyframe(key)
+
+# 全ノードをいい位置に移動
+for node in hou.node("/").allSubChildren():
+    node.moveToGoodPosition()
+
+# 保存
+hou.hipFile.save("soccerball_by_script_09.hip")
