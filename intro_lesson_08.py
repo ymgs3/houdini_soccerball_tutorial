@@ -14,7 +14,7 @@ geo = hou.node("/obj/soccerball_geo")
 
 # 01
 geo_anim = geo.copyTo(obj)
-geo_anim.setName("socccerball_anim")
+geo_anim.setName("soccerball_anim")
 
 geo.setDisplayFlag(False)
 geo_anim.setDisplayFlag(True)
@@ -74,7 +74,7 @@ squash_ctrl.parm("pre_xform").pressButton()
 squash_ctrl.setInput(0,soccerball_ctrl)
 
 # 07
-null_geo_out = hou.node("/obj/socccerball_anim/GEOMETRY_OUT")
+null_geo_out = hou.node("/obj/soccerball_anim/GEOMETRY_OUT")
 
 bend = geo_anim.createNode("bend")
 bend.setInput(0, matchsize)
