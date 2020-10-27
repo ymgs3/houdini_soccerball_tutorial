@@ -97,9 +97,11 @@ rendergeometrysettings.setInput(0,reference)
 materiallibrary2.setInput(0,rendergeometrysettings)
 
 # 08
-copyNodes[-1].parm("camera").set(camera.parm("primpath").eval())
-copyNodes[-1].parm("picture").set("$HIP/render/soccerbal_anim_$F.exr")
-copyNodes[-1].parm("execute").pressButton()
+karma = copyNodes[-1]
+karma.parm("camera").set(camera.parm("primpath").eval())
+karma.parm("trange").set(karma.parm("trange").menuItems()[1])
+karma.parm("picture").set("$HIP/render/soccerbal_anim_$F.exr")
+karma.parm("execute").pressButton()
 
 
 # 全ノードをいい位置に移動
