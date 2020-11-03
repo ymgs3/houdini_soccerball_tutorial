@@ -13,6 +13,13 @@ if not 'HFS' in os.environ:
 
         
 geo_out = hou.node("/obj/soccerball_geo/GEOMETRY_OUT")
+stage = hou.node("/stage")
+backdrop = hou.node("/stage/backdrop")
+
+materiallibrary = None
+for child in stage.children():
+    if child.type().nameComponents()[2] == "materiallibrary":
+        materiallibrary = child
 
 # 01
 geo = hou.node("/obj").createNode('geo',"soccerball_sim")
@@ -56,7 +63,62 @@ rbdbulletsolver.setParms({
 rbdbulletsolver.parm("resetsim").pressButton()
 
 rbdbulletsolver.setInput(0,copytopoints)
-rbdbulletsolver.setDisplayFlag(True)
+
+# 05
+usdexport = geo.createNode("usdexport")
+usdexport.parm("trange").set(1)
+usdexport.parm("lopoutput").set("$HIP/geo/soccerball_sim.usd")
+usdexport.setInput(0,rbdbulletsolver)
+usdexport.setDisplayFlag(True)
+usdexport.parm("execute").pressButton()
+
+# 06
+reference = stage.createNode("reference","soccerball_sim")
+reference.parm("filepath1").set("$HIP/geo/soccerball_sim.usd")
+reference.setInput(0,backdrop)
+reference.setDisplayFlag(True)
+
+# 07
+rendergeometrysettings = stage.createNode("rendergeometrysettings")
+rendergeometrysettings.parm("primpattern").set("/soccerball_sim/piece*")
+rendergeometrysettings.parm("xn__primvarskarmaobjectmblur_control_8sbfg").set(rendergeometrysettings.parm("xn__primvarskarmaobjectmblur_control_8sbfg").menuItems()[0])
+rendergeometrysettings.parm("xn__primvarskarmaobjectmblur_7fbfg").set(True)
+rendergeometrysettings.parm("xn__primvarskarmaobjectgeosamples_control_e1bfg").set(rendergeometrysettings.parm("xn__primvarskarmaobjectgeosamples_control_e1bfg").menuItems()[0])
+rendergeometrysettings.parm("xn__primvarskarmaobjectgeosamples_dobfg").set(2)
+rendergeometrysettings.setDisplayFlag(True)
+
+# 08
+configureprimitive = stage.createNode("configureprimitive")
+configureprimitive.parm("primpattern").set("/soccerball_sim/piece*")
+configureprimitive.parm("setinstanceable").set(True)
+configureprimitive.parm("instanceable").set(configureprimitive.parm("instanceable").menuItems()[0])
+configureprimitive.setInput(0,reference)
+rendergeometrysettings.setInput(0,configureprimitive)
+
+# 09
+materiallibrary2 = materiallibrary.copyTo(stage)
+materiallibrary2.parm("geopath1").set("/soccerball_sim/piece*")
+materiallibrary2.setInput(0,rendergeometrysettings)
+
+# 10
+domelight = hou.node("/stage/camera2")
+domelight.setSelected(True,True)
+node = domelight.outputs()
+while(len(node) > 0):
+    node = node[0]
+    node.setSelected(True)
+    node = node.outputs()
+    
+copyNodes = hou.copyNodesTo(hou.selectedNodes(), stage)
+
+# 11
+camera = copyNodes[0]
+camera.setInput(0,materiallibrary2)
+karma = copyNodes[-1]
+karma.parm("camera").set(camera.parm("primpath").eval())
+karma.parm("picture").set("$HIP/render/soccerbal_sim_$F.exr")
+karma.setDisplayFlag(True)
+karma.parm("execute").pressButton()
 
 
 # 全ノードをいい位置に移動
